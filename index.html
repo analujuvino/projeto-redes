@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Segurança em Redes Wi-Fi · Seminário de Redes · UNIESP</title>
+<meta name="description" content="Seminário de Redes de Computadores sobre Segurança em Redes Wi-Fi: riscos, protocolos, ataques e defesa. UNIESP, 2026.">
+<meta name="theme-color" content="#050A16">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Doto:wght@700..900&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="viewport">
+<main id="deck" aria-live="polite">
+
+<!-- 1 · CAPA -->
+<section class="slide cover" data-title="Capa" data-block="Abertura" style="justify-content:flex-start">
+<svg class="shards" aria-hidden="true" width="1920" height="1080" viewBox="0 0 1920 1080">
+<g transform="rotate(-35 300 1000)" fill="none" stroke-width="3">
+<rect x="-120" y="900" width="420" height="120" fill="#1A334A" stroke="#1E536E" opacity="0.8"/>
+<rect x="340" y="930" width="220" height="90" stroke="#18A3B7" opacity="0.5"/>
+<rect x="60" y="1060" width="300" height="100" stroke="#6F71A1" opacity="0.6"/>
+</g>
+</svg>
+<img class="cover-photo" src="img/capa.webp" alt="Chave digital prateada com um escudo e cadeado brilhando em azul, cercada por circuitos e números">
+<div class="terminal cover-term" style="left:128px; top:532px; width:940px; height:236px"><div class="term-out" data-term="scan"></div></div>
+<div class="cover-text" style="width:900px">
+<p class="eyebrow rise" style="--i:0; margin:0">SEMINÁRIO DE REDES</p>
+<h1 class="cover-title">Segurança em<br>Redes <span class="hl">Wi-Fi</span></h1>
+<div class="type-line" data-type="Do sinal no ar ao ataque: como se proteger?" aria-label="Do sinal no ar ao ataque: como se proteger?"></div>
+<div class="term-space" style="height:236px"></div>
+<p class="meta rise" style="--i:6; transform:translateX(20px)">UNIESP · Ciência da Computação · 25/11/2026</p>
+</div>
+<button class="start-btn rise" style="--i:8" data-go="next">Começar <span aria-hidden="true">→</span></button>
+<aside>[Ana Lucia] Boa tarde, professora e colegas! Nós somos Ana Lucia, Bya, Neto e Samuel, e o nosso tema é Segurança em Redes Wi-Fi. Reparem no terminal: das redes ao nosso redor, algumas estão protegidas e outras estão abertas para qualquer um. Hoje vamos passar por quatro pontos: os riscos, os protocolos, os ataques e, principalmente, a defesa.</aside>
+</section>
+
+<!-- 2 · ROTEIRO -->
+<section class="slide alt" data-title="Roteiro" data-block="Abertura">
+<p class="eyebrow">AGENDA</p>
+<h2>Roteiro da apresentação</h2>
+<div class="row">
+<button class="card link-card rise" style="--i:0" data-go="3"><p class="num">01</p><h3>O problema</h3><p class="txt">Por que o Wi-Fi é um alvo e o que precisamos proteger</p><p class="who">Ana Lucia</p><span class="go-hint">ir <span aria-hidden="true">→</span></span></button>
+<button class="card link-card rise" style="--i:1" data-go="5"><p class="num">02</p><h3>Protocolos</h3><p class="txt">De WEP a WPA3: como a proteção evoluiu</p><p class="who">Bya</p><span class="go-hint">ir <span aria-hidden="true">→</span></span></button>
+<button class="card link-card rise" style="--i:2" data-go="7"><p class="num" style="color:#FF5C72">03</p><h3>Ataques</h3><p class="txt">Evil Twin, desautenticação, força bruta e WPS</p><p class="who">Neto</p><span class="go-hint">ir <span aria-hidden="true">→</span></span></button>
+<button class="card link-card rise" style="--i:3" data-go="9"><p class="num">04</p><h3>Defesa</h3><p class="txt">Boas práticas em casa e em redes públicas</p><p class="who">Samuel</p><span class="go-hint">ir <span aria-hidden="true">→</span></span></button>
+</div>
+<div class="footer"><p class="label">ABERTURA — Ana Lucia</p><div class="pg"></div></div>
+<aside>[Ana Lucia] Dividimos em quatro partes: eu explico por que o Wi-Fi é um alvo, a Bya mostra os protocolos, o Neto apresenta os ataques e o Samuel fecha com as formas de proteção.</aside>
+</section>
+
+<!-- 3 · O PROBLEMA -->
+<section class="slide" data-title="Por que o Wi-Fi é um alvo" data-block="01 · O problema — Ana Lucia">
+<div class="split">
+<div class="main">
+<p class="eyebrow">01 · O PROBLEMA</p>
+<h2>Por que o Wi-Fi é um alvo</h2>
+<p class="statement rise" style="--i:0; width:1040px; margin-bottom:48px">No cabo, o atacante precisa de acesso físico. No Wi-Fi, basta estar <span class="hl">no alcance do sinal</span>.</p>
+<div class="items">
+<div class="item hover-row rise" style="--i:1"><i class="ic" data-icon="activity"></i><div class="col" style="gap:6px"><h3>Ondas atravessam paredes</h3><p class="txt">O sinal vaza para o corredor, a rua e o estacionamento.</p></div></div>
+<div class="item hover-row rise" style="--i:2"><i class="ic" data-icon="users"></i><div class="col" style="gap:6px"><h3>Meio compartilhado</h3><p class="txt">Todos no alcance recebem os mesmos sinais de rádio.</p></div></div>
+<div class="item hover-row rise" style="--i:3"><i class="ic bad" data-icon="warning"></i><div class="col" style="gap:6px"><h3 style="color:#ff5c72">Muitas portas de entrada</h3><p class="txt" style="font-size:24px">Celulares, notebooks, câmeras e IoT, muitos mal configurados.</p></div></div>
+</div>
+</div>
+<div class="photo-wrap fade" style="--i:2"><img class="photo" src="img/problema.jpg" alt="Mãos digitando num notebook com ícones de pessoas conectadas em rede brilhando em azul"></div>
+</div>
+<div class="footer"><p class="label">01 · O PROBLEMA — Ana Lucia</p><div class="pg"></div></div>
+<aside>[Ana Lucia] Numa rede cabeada, para interceptar dados é preciso acesso físico ao cabo. No Wi-Fi não: o sinal é uma onda de rádio que se espalha e atravessa paredes. Alguém do lado de fora do prédio recebe os mesmos sinais que a gente. E cada dispositivo conectado, do celular à câmera, é uma possível porta de entrada.</aside>
+</section>
+
+<!-- 4 · PILARES -->
+<section class="slide alt" data-title="O que a segurança precisa garantir" data-block="01 · O problema — Ana Lucia">
+<p class="eyebrow">01 · O PROBLEMA</p>
+<h2>O que a segurança precisa garantir</h2>
+<div class="grid2">
+<div class="card side lift rise" style="--i:0"><i class="ic" data-icon="lock"></i><div class="col"><h3>Confidencialidade</h3><p class="txt">Só quem tem a chave consegue ler os dados. É o papel da criptografia.</p></div></div>
+<div class="card side lift rise" style="--i:1"><i class="ic" data-icon="check-circle"></i><div class="col"><h3>Integridade</h3><p class="txt">Os dados chegam exatamente como saíram, sem alteração no caminho.</p></div></div>
+<div class="card side lift rise" style="--i:2"><i class="ic" data-icon="key"></i><div class="col"><h3>Autenticação</h3><p class="txt">Só dispositivos e usuários autorizados entram na rede.</p></div></div>
+<div class="card side lift rise" style="--i:3"><i class="ic" data-icon="activity"></i><div class="col"><h3>Disponibilidade</h3><p class="txt">A rede continua funcionando, mesmo sob tentativa de ataque.</p></div></div>
+</div>
+<div class="footer"><p class="label">01 · O PROBLEMA — Ana Lucia</p><div class="pg"></div></div>
+<aside>[Ana Lucia] Uma rede segura garante quatro coisas. Confidencialidade: ninguém de fora lê o que trafega. Integridade: o dado não é alterado no caminho. Autenticação: só entra quem tem permissão. E disponibilidade: a rede continua no ar, porque alguns ataques só querem derrubar a conexão. Agora passo para a Bya.</aside>
+</section>
+
+<!-- 5 · PROTOCOLOS -->
+<section class="slide with-strip" data-title="A evolução dos protocolos" data-block="02 · Protocolos — Bya">
+<img class="strip" src="img/protocolos.webp" alt="Código binário em azul se dissolvendo no escuro">
+<p class="eyebrow">02 · PROTOCOLOS</p>
+<h2>A evolução dos protocolos</h2>
+<table class="tbl rise" style="--i:0">
+<thead><tr class="head"><th style="width:17%">Protocolo</th><th style="width:12%">Ano</th><th style="width:37%">Criptografia</th><th style="width:34%">Situação hoje</th></tr></thead>
+<tbody>
+<tr><td>WEP</td><td>1999</td><td>RC4, chave fixa e curta</td><td style="color:#FF5C72">Quebrado: não usar</td></tr>
+<tr><td>WPA</td><td>2003</td><td>TKIP, solução emergencial</td><td style="color:#FF5C72">Obsoleto</td></tr>
+<tr><td>WPA2</td><td>2004</td><td>AES-CCMP</td><td>Aceitável, com senha forte</td></tr>
+<tr class="best"><td>WPA3</td><td>2018</td><td>AES + troca de chaves SAE</td><td style="color:#27E6EC">Recomendado</td></tr>
+</tbody>
+</table>
+<p class="statement" style="width:1216px; margin-top:56px; margin-bottom:0">Cada geração corrigiu falhas da anterior, mas <span class="hl">redes antigas continuam em uso</span>.</p>
+<div class="footer" style="left:576px; width:1216px"><p class="label">02 · PROTOCOLOS — Bya</p><div class="pg"></div></div>
+<aside>[Bya] A proteção do Wi-Fi passou por quatro gerações. O WEP usava uma chave fixa e curta e hoje é quebrado em minutos. O WPA foi uma solução de emergência, em 2003. O WPA2, de 2004, trouxe a criptografia AES e foi o padrão por mais de dez anos. E o WPA3, de 2018, mudou a forma como a senha gera a chave. Resumindo: WEP e WPA não devem ser usados, WPA2 ainda é aceitável com senha forte e o recomendado é o WPA3.</aside>
+</section>
+
+<!-- 6 · HANDSHAKE -->
+<section class="slide alt" data-title="Como a chave é combinada" data-block="02 · Protocolos — Bya">
+<p class="eyebrow">02 · PROTOCOLOS</p>
+<h2 style="width:1631px; font-size:112px; font-weight:900; line-height:1.04">Como a chave é combinada</h2>
+<div class="row" style="gap:48px">
+<div class="col" style="flex:1.5">
+<div class="hs-top"><p class="year">WPA2 · HANDSHAKE DE 4 VIAS</p><button class="mini-btn" data-action="handshake">▶ Simular</button></div>
+<div class="hs">
+<div class="hs-row rise" style="--i:0"><p class="badge">1</p><p class="txt"><span class="hl">AP → Cliente:</span> envia um número aleatório.</p></div>
+<div class="hs-row rise" style="--i:1"><p class="badge">2</p><p class="txt"><span class="hl">Cliente → AP:</span> envia o seu número. Os dois calculam a mesma chave.</p></div>
+<div class="hs-row rise" style="--i:2"><p class="badge">3</p><p class="txt"><span class="hl">AP → Cliente:</span> confirma e envia a chave de grupo, já cifrada.</p></div>
+<div class="hs-row rise" style="--i:3"><p class="badge">4</p><p class="txt"><span class="hl">Cliente → AP:</span> confirma. Daqui em diante, tudo é criptografado.</p></div>
+</div>
+<div class="band bad" style="margin-top:20px"><p class="txt" style="color:#E8F4F8">A senha nunca passa pelo ar, mas quem <span class="warn">grava esse diálogo</span> pode testar senhas offline.</p></div>
+</div>
+<div class="card glow lift rise" style="--i:4"><i class="ic" data-icon="verified"></i><h3>WPA3 · SAE</h3><p class="txt">Cada tentativa de senha exige falar com o roteador: o teste offline deixa de funcionar.</p><p class="txt">Se a senha vazar amanhã, o tráfego gravado hoje continua protegido.</p></div>
+</div>
+<div class="footer"><p class="label">02 · PROTOCOLOS — Bya</p><div class="pg"></div></div>
+<aside>[Bya] Como o celular e o roteador combinam a chave sem mandar a senha pelo ar? No WPA2, isso é o handshake de 4 vias: os dois trocam números aleatórios e, com a senha, calculam a mesma chave. O problema é que quem grava essa troca pode testar senhas no próprio computador até acertar. O WPA3 resolve isso com o SAE: cada tentativa precisa falar com o roteador. Agora o Neto mostra os ataques.</aside>
+</section>
+
+<!-- 7 · ATAQUES -->
+<section class="slide danger" data-title="Ataques mais comuns" data-block="03 · Ataques — Neto" style="padding-left:840px">
+<img class="bg" src="img/ataques.jpg" alt="Hacker de capuz e máscara diante de vários monitores com código em vermelho e ciano">
+<div class="shade-right"></div>
+<div class="terminal danger-term" style="left:128px; top:612px; width:660px; height:308px"><div class="term-head">● ● ●&nbsp;&nbsp;&nbsp;simulação · ataque de dicionário</div><div class="term-out" data-term="brute"></div></div>
+<p class="eyebrow">03 · ATAQUES</p>
+<h2>Ataques mais comuns</h2>
+<p class="hint">Clique num ataque para ver a defesa</p>
+<div class="grid2" style="gap:24px">
+<button class="card glass threat flip rise" style="--i:0"><span class="face front"><i class="ic" data-icon="warning"></i><h3>Evil Twin</h3><p class="txt">Rede falsa com o mesmo nome da verdadeira.</p></span><span class="face back"><i class="ic ok" data-icon="verified"></i><h3>Defesa</h3><p class="txt">Confirme o nome da rede e use VPN.</p></span></button>
+<button class="card glass flip rise" style="--i:1"><span class="face front"><i class="ic" data-icon="lightning"></i><h3>Desautenticação</h3><p class="txt">Mensagens falsas expulsam usuários da rede.</p></span><span class="face back"><i class="ic ok" data-icon="verified"></i><h3>Defesa</h3><p class="txt">WPA3 protege essas mensagens (PMF).</p></span></button>
+<button class="card glass flip rise" style="--i:2"><span class="face front"><i class="ic" data-icon="key"></i><h3>Força bruta</h3><p class="txt">Testa milhões de senhas contra o handshake.</p></span><span class="face back"><i class="ic ok" data-icon="verified"></i><h3>Defesa</h3><p class="txt">Frase-senha longa e WPA3 (SAE).</p></span></button>
+<button class="card glass flip rise" style="--i:3"><span class="face front"><i class="ic" data-icon="lock"></i><h3>WPS</h3><p class="txt">PIN de 8 dígitos cai em cerca de 11 mil tentativas.</p></span><span class="face back"><i class="ic ok" data-icon="verified"></i><h3>Defesa</h3><p class="txt">Desative o WPS no roteador.</p></span></button>
+</div>
+<div class="footer" style="left:840px; width:952px"><p class="label">03 · ATAQUES — Neto</p><div class="pg"></div></div>
+<aside>[Neto] Estes são os ataques mais comuns. No terminal à esquerda tem uma simulação de ataque de dicionário: reparem como senhas comuns vão sendo testadas até uma bater. O Evil Twin, que vou detalhar a seguir, é um roteador falso com o nome da rede real. A desautenticação manda mensagens falsas que expulsam as pessoas da rede. A força bruta grava aquele handshake que a Bya mostrou e testa milhões de senhas no computador; senha fraca cai rápido. E o WPS, o botão de conexão rápida do roteador, tem um PIN que se descobre com umas 11 mil tentativas. Lembrando: testar isso só na própria rede ou com autorização, invadir rede alheia é crime.</aside>
+</section>
+
+<!-- 8 · EVIL TWIN -->
+<section class="slide danger" data-title="Evil Twin" data-block="03 · Ataques — Neto">
+<p class="eyebrow">03 · ATAQUES</p>
+<h2>Evil Twin: o ponto de acesso falso</h2>
+<div class="flow">
+<div class="card node rise" style="--i:0" data-node="victim"><i class="ic" data-icon="users"></i><h3>Vítima</h3><p class="txt">Conecta em “Cafe_WiFi” achando que é a rede do café.</p></div>
+<div class="arrow fade" style="--i:1"></div>
+<div class="card threat node rise" style="--i:2" data-node="attacker"><i class="ic" data-icon="warning"></i><h3 class="warn">Atacante</h3><p class="txt">AP falso com o mesmo nome e sinal mais forte que o verdadeiro.</p></div>
+<div class="arrow fade" style="--i:3"></div>
+<div class="card node rise" style="--i:4" data-node="internet"><i class="ic" data-icon="globe"></i><h3>Internet</h3><p class="txt">Tudo funciona normalmente, mas passa pelo atacante antes.</p></div>
+</div>
+<div class="sim rise" style="--i:5">
+<p class="sim-label">Simule: em qual rede você conectaria?</p>
+<button class="net" data-net="fake"><span class="bars b4"></span>Cafe_WiFi <em>sinal forte</em></button>
+<button class="net" data-net="real"><span class="bars b2"></span>Cafe_WiFi <em>sinal fraco</em></button>
+<p class="sim-out" aria-live="polite"></p>
+</div>
+<div class="band rise" style="--i:6; margin-top:24px"><p style="color:#E8F4F8">O atacante lê o tráfego sem criptografia e pode exibir <span class="warn">páginas de login falsas</span>. A <span class="hl">VPN</span> e o <span class="hl">HTTPS</span> protegem o conteúdo.</p></div>
+<div class="footer"><p class="label">03 · ATAQUES — Neto</p><div class="pg"></div></div>
+<aside>[Neto] No Evil Twin, o atacante cria uma rede com o mesmo nome de uma conhecida, por exemplo a do café, e com sinal mais forte. O celular conecta nela achando que é a verdadeira. A internet funciona, então ninguém percebe, mas tudo passa pelo atacante. Muitas vezes ele combina isso com a desautenticação: derruba a vítima da rede real para ela reconectar na falsa. Agora o Samuel mostra como se proteger.</aside>
+</section>
+
+<!-- 9 · EM CASA -->
+<section class="slide" data-title="Proteção em casa" data-block="04 · Defesa — Samuel">
+<div class="split">
+<div class="photo-wrap fade" style="--i:0"><img class="photo" src="img/casa.jpg" alt="Escudo com cadeado digital brilhando em azul sobre um tablet escuro"></div>
+<div class="main">
+<p class="eyebrow">04 · DEFESA</p>
+<h2>Proteção em casa</h2>
+<div class="checks">
+<button class="check rise" style="--i:0" aria-pressed="false"><i class="ic-s" data-icon="check"></i><p>Use <b>WPA3</b>, ou WPA2 com AES se o roteador não suportar</p></button>
+<button class="check rise" style="--i:1" aria-pressed="false"><i class="ic-s" data-icon="check"></i><p>Senha longa: uma frase-senha com <b>12 ou mais caracteres</b></p></button>
+<button class="check rise" style="--i:2" aria-pressed="false"><i class="ic-s" data-icon="check"></i><p>Desative o <b>WPS</b></p></button>
+<button class="check rise" style="--i:3" aria-pressed="false"><i class="ic-s" data-icon="check"></i><p>Troque a senha de <b>administrador</b> do roteador</p></button>
+<button class="check rise" style="--i:4" aria-pressed="false"><i class="ic-s" data-icon="check"></i><p>Mantenha o <b>firmware</b> atualizado</p></button>
+<button class="check rise" style="--i:5" aria-pressed="false"><i class="ic-s" data-icon="check"></i><p>Crie uma <b>rede de visitantes</b> para convidados e IoT</p></button>
+</div>
+<div class="score rise" style="--i:6">
+<div class="meter"><div class="meter-fill"></div></div>
+<p class="score-txt">Sua rede: 0/6 itens</p>
+<button class="mini-btn" data-open="senha">Testar uma senha</button>
+</div>
+</div>
+</div>
+<div class="footer"><p class="label">04 · DEFESA — Samuel</p><div class="pg"></div></div>
+<aside>[Samuel] Em casa, seis atitudes resolvem a maior parte dos riscos. Usar WPA3, ou pelo menos WPA2 com AES. Ter uma senha longa: uma frase como “meu gato dorme no sofá azul” é mais forte e mais fácil de lembrar. Desligar o WPS. Trocar a senha de administrador do roteador, que muita gente deixa como “admin”. Atualizar o firmware. E criar uma rede separada para visitantes e dispositivos como câmeras.</aside>
+</section>
+
+<!-- 10 · WI-FI PÚBLICO -->
+<section class="slide alt centered" data-title="Proteção em Wi-Fi público" data-block="04 · Defesa — Samuel">
+<canvas class="dots" aria-hidden="true"></canvas>
+<p class="eyebrow">04 · DEFESA</p>
+<h2>Proteção em Wi-Fi público</h2>
+<div class="grid2 center-grid">
+<div class="card tip lift rise" style="--i:0"><div class="ring"><i class="ic" data-icon="lock"></i></div><h3>Use uma VPN</h3><p class="txt">Cria um túnel cifrado: nem num Evil Twin o atacante lê nada.</p></div>
+<div class="card tip lift rise" style="--i:1"><div class="ring"><i class="ic" data-icon="globe"></i></div><h3>Confira o HTTPS</h3><p class="txt">Só digite senhas em sites com o cadeado na barra de endereço.</p></div>
+<div class="card tip lift rise" style="--i:2"><div class="ring"><i class="ic" data-icon="settings"></i></div><h3>Sem conexão automática</h3><p class="txt">Confirme o nome exato da rede e não deixe o celular entrar sozinho.</p></div>
+<div class="card tip tip-bad lift rise" style="--i:3"><div class="ring ring-bad"><i class="ic bad" data-icon="warning"></i></div><h3>Prefira os dados móveis</h3><p class="txt">Banco e compras ficam para o 4G/5G, nunca para a rede aberta.</p></div>
+</div>
+<div class="footer"><p class="label">04 · DEFESA — Samuel</p><div class="pg"></div></div>
+<aside>[Samuel] E na rede do shopping ou do aeroporto, que não é nossa? Aí protegemos a nossa própria conexão. Primeiro, a VPN: ela cria um túnel criptografado, então nem num Evil Twin o atacante lê nada. Segundo, só digitar senha em site com HTTPS, aquele cadeado na barra de endereço. Terceiro, desligar a conexão automática e confirmar o nome da rede com o estabelecimento. E quarto: banco e compras ficam para os dados móveis.</aside>
+</section>
+
+<!-- 11 · CONCLUSÃO -->
+<section class="slide accent" data-title="Conclusão" data-block="04 · Defesa — Samuel">
+<img class="bg" src="img/resumo.jpg" alt="Corredor de servidores com painéis de dados em azul e luzes laranja, escurecido">
+<p class="eyebrow">CONCLUSÃO</p>
+<h1 class="rise" style="--i:0; font-size:112px">Protocolo forte<br><span class="dim">+</span> configuração correta<br><span class="dim">+</span> usuário atento</h1>
+<p class="lead rise" style="--i:2">Nenhuma tecnologia sozinha protege a rede: uma senha fraca ou um clique distraído ainda abrem a porta.</p>
+<div class="footer"><p class="label">CONCLUSÃO — Samuel</p><div class="pg"></div></div>
+<aside>[Samuel] Para fechar: segurança em Wi-Fi depende de três coisas ao mesmo tempo. Um protocolo forte, uma configuração correta e um usuário atento. Se uma delas falhar, as outras não seguram sozinhas.</aside>
+</section>
+
+<!-- 12 · PERGUNTAS -->
+<section class="slide cover" data-title="Perguntas" data-block="Encerramento">
+<svg class="shards" aria-hidden="true" width="1920" height="1080" viewBox="0 0 1920 1080">
+<g transform="rotate(-35 300 1000)" fill="none" stroke-width="3">
+<rect x="-120" y="900" width="420" height="120" fill="#1A334A" stroke="#1E536E" opacity="0.8"/>
+<rect x="340" y="930" width="220" height="90" stroke="#18A3B7" opacity="0.5"/>
+<rect x="60" y="1060" width="300" height="100" stroke="#6F71A1" opacity="0.6"/>
+</g>
+</svg>
+<div class="split" style="align-items:center">
+<div class="main" style="gap:28px">
+<p class="eyebrow" style="margin:0">OBRIGADO!</p>
+<div class="q-row"><h1 class="rise" style="--i:0">Perguntas<span class="hl">?</span></h1><button class="mini-btn big rise" style="--i:1" data-open="quiz">Quiz rápido</button></div>
+<div class="refs rise" style="--i:2; margin-top:40px">
+<p class="year">REFERÊNCIAS</p>
+<p class="txt">KUROSE, J.; ROSS, K. <i>Redes de Computadores e a Internet</i>. Cap. 8: Segurança em redes.</p>
+<p class="txt">TANENBAUM, A. <i>Redes de Computadores</i>. Cap. 8: Segurança de redes.</p>
+<p class="txt">Wi-Fi Alliance. <i>Wi-Fi Protected Access (WPA3)</i>. <a href="https://www.wi-fi.org/discover-wi-fi/security" target="_blank" rel="noopener">wi-fi.org</a></p>
+</div>
+<div class="refs rise" style="--i:3; margin-top:90px">
+<p class="year">EQUIPE</p>
+<div class="grid2" style="gap:12px 16px; width:780px"><p class="chip">Ana Lucia Juvino</p><p class="chip">Bya Gonçalves</p><p class="chip">Adailton Neto</p><p class="chip">Samuel Gomes</p></div>
+</div>
+</div>
+<div class="photo-wrap tall fade" style="--i:1"><img class="photo tall" src="img/final.jpg" alt="Mão tocando um cadeado luminoso no centro de um painel digital circular"></div>
+</div>
+<aside>[Samuel] Essa foi a nossa apresentação. Obrigado pela atenção! Alguém tem alguma pergunta?</aside>
+</section>
+
+</main>
+</div>
+
+<!-- Interface do site -->
+<div id="progress"><div id="progress-fill"></div></div>
+<div id="chrome">
+<button class="ctl" id="btn-menu" title="Menu (M)" aria-label="Abrir menu"><svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+<div class="ctl-group">
+<button class="ctl" id="btn-prev" title="Anterior (←)" aria-label="Slide anterior"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
+<span id="counter">01 / 12</span>
+<button class="ctl" id="btn-next" title="Próximo (→)" aria-label="Próximo slide"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button>
+</div>
+<button class="ctl" id="btn-notes" title="Notas do apresentador (N)" aria-label="Notas do apresentador"><svg viewBox="0 0 24 24"><path d="M4 4h16v12H8l-4 4z"/></svg></button>
+<button class="ctl" id="btn-full" title="Tela cheia (F)" aria-label="Tela cheia"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+</div>
+
+<nav id="menu" aria-hidden="true">
+<div class="menu-head"><p class="menu-title">// SEGURANÇA EM REDES WI-FI</p><button class="ctl" data-close="menu" aria-label="Fechar menu"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+<ol id="menu-list"></ol>
+<p class="menu-keys">← → navegar · M menu · N notas · F tela cheia</p>
+</nav>
+
+<div id="notes" aria-hidden="true"><p id="notes-text"></p></div>
+
+<div class="modal" id="modal-senha" aria-hidden="true" role="dialog" aria-labelledby="senha-title">
+<div class="modal-box">
+<button class="ctl modal-x" data-close="senha" aria-label="Fechar"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+<p class="eyebrow">TESTE DE SENHA</p>
+<h3 id="senha-title">Quanto tempo um ataque de força bruta levaria?</h3>
+<input id="pw" type="text" autocomplete="off" spellcheck="false" placeholder="Digite uma senha de exemplo">
+<div class="meter big"><div class="meter-fill" id="pw-fill"></div></div>
+<p id="pw-verdict">Digite algo para ver o resultado.</p>
+<p id="pw-time" class="txt"></p>
+<p class="tiny">Estimativa simples: 10 bilhões de tentativas por segundo, em ataque offline contra um handshake WPA2. Nada do que você digita sai deste navegador. Use uma senha de exemplo, não a sua de verdade.</p>
+</div>
+</div>
+
+<div class="modal" id="modal-quiz" aria-hidden="true" role="dialog" aria-labelledby="quiz-title">
+<div class="modal-box">
+<button class="ctl modal-x" data-close="quiz" aria-label="Fechar"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+<p class="eyebrow">QUIZ RÁPIDO</p>
+<h3 id="quiz-title"></h3>
+<div id="quiz-opts"></div>
+<p id="quiz-fb" class="txt" aria-live="polite"></p>
+<div class="quiz-foot"><span id="quiz-step"></span><button class="mini-btn" id="quiz-next">Próxima</button></div>
+</div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
